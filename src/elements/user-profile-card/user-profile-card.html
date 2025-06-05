@@ -1,0 +1,21 @@
+<div
+  class="w-40 h-40 bg-gray-100 rounded-md flex flex-col gap-2 p-3 items-center"
+>
+  <img
+    [ngSrc]="profile().avatar_url"
+    width="60"
+    height="60"
+    class="rounded-full shadow-sm"
+    [alt]="profile().login"
+  />
+  <p class="text-ellipsis text-nowrap max-w-36 overflow-hidden">
+    {{ profile().login }}
+  </p>
+  <a
+    class="bg-gray-200 rounded-md py-1 px-2 flex gap-1 hover:bg-gray-300 cursor-pointer"
+    [href]="profile().html_url"
+    target="_blank"
+  >
+    <i class="ri-github-fill"></i>View Profile
+  </a>
+</div>

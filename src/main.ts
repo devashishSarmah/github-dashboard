@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { Component } from "@angular/core";
+import { bootstrapApplication } from "@angular/platform-browser";
+import { RouterOutlet } from "@angular/router";
+import { Header } from "./elements/header/header";
+import { config } from "./config";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   template: `
-    <h1>Hello from {{ name }}!</h1>
-    <a target="_blank" href="https://angular.dev/overview">
-      Learn more about Angular
-    </a>
+    <app-header></app-header>
+    <div class="container mx-auto pt-16 px-4">
+      <router-outlet></router-outlet>
+    </div>
   `,
+  imports: [RouterOutlet, Header],
 })
-export class App {
-  name = 'Angular';
-}
+export class App {}
 
-bootstrapApplication(App);
+bootstrapApplication(App, config);

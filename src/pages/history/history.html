@@ -1,0 +1,39 @@
+<div class="flex items-center justify-center pt-16 flex-col">
+  <div class="flex justify-between w-full items-center">
+    <p>Your Search History</p>
+    <button
+      class="py-1 px-2 bg-red-50 hover:bg-red-100 text-red-700 rounded-md transition-colors flex gap-1 cursor-pointer"
+      (click)="globalHistoryStore.clear()"
+    >
+      <i class="ri-delete-bin-line"></i>
+      Clear All
+    </button>
+  </div>
+  <div class="mt-4 w-full flex flex-col gap-2 content-start">
+    @if(globalHistoryStore.history().length) { @for(history of
+    globalHistoryStore.history(); track history.query) {
+    <ng-container
+      *ngTemplateOutlet="historyItem; context: { $implicit: history }"
+    ></ng-container>
+    } }
+  </div>
+</div>
+
+<ng-template #historyItem let-history>
+  <div class="w-full flex justify-between h-53 bg-gray-50 rounded-md p-3">
+    <div class="flex flex-col gap-2">
+      <p>Search Query</p>
+      <p class="rounded-md bg-gray-100 py-1 px-2 max-w-28">
+        {{ history.query }}
+      </p>
+    </div>
+    <div class="flex flex-col items-center gap-2">
+      <div class="flex gap-3 content-start flex-wrap">
+        @for(item of history.items; track item.id) {
+        <app-user-profile-card [profile]="item"></app-user-profile-card>
+        }
+      </div>
+      <p>Showing {{ history.items.length }} of {{ history.total }} results</p>
+    </div>
+  </div>
+</ng-template>

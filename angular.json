@@ -5,7 +5,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "demo": {
+    "github-dashboard": {
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -29,7 +29,7 @@
             "assets": [],
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "outputPath": "dist/demo",
+            "outputPath": "dist/github-dashboard",
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": ["src/global_styles.css"],
@@ -40,13 +40,22 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "development": {
-              "buildTarget": "demo:build:development"
+              "buildTarget": "github-dashboard:build:development"
             },
             "production": {
-              "buildTarget": "demo:build:production"
+              "buildTarget": "github-dashboard:build:production"
             }
           },
           "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "styles": ["src/global_styles.css"],
+            "scripts": []
+          }
         }
       },
       "prefix": "app",

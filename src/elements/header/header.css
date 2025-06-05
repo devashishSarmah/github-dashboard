@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+.nav-link {
+  @apply py-1 px-2;
+}
+
+.nav-link.active {
+  @apply bg-gray-100 py-1 px-2 rounded-md;
+}

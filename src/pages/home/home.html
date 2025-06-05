@@ -1,0 +1,55 @@
+<div class="flex items-center justify-center pt-16 flex-col">
+  <div class="flex gap-2">
+    <div class="gap-2 flex items-center bg-gray-100 px-2 py-1 rounded-md">
+      <i class="ri-search-2-line"></i>
+      <input
+        class="placeholder:text-gray-400 focus:outline-none"
+        type="text"
+        placeholder="Search for a user"
+        [(ngModel)]="query"
+        (keyup.enter)="searchBtn.click()"
+      />
+    </div>
+    <button
+      #searchBtn
+      class="py-1 px-2 bg-gray-100 hover:bg-gray-300 rounded-md disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100 transition-colors"
+      [disabled]="!query().length"
+      (click)="search()"
+    >
+      Search
+    </button>
+  </div>
+  <div
+    class="mt-8 w-full md:w-[43rem] flex gap-3 content-start min-h-96 flex-wrap"
+  >
+    @if(githubStore.isLoading()) { @for(i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    12]; track i) {
+    <ng-container *ngTemplateOutlet="shimmerUserProfile"></ng-container>
+    } } @else { @for(profile of githubStore.searchUserResponse()?.items; track
+    profile.login) {
+    <app-user-profile-card [profile]="profile"></app-user-profile-card>
+    } }
+  </div>
+  @if(githubStore.searchUserResponse()?.total_count) {
+  <div class="mt-8">
+    <app-pagination
+      [total]="githubStore.searchUserResponse()!.total_count"
+      [currentPage]="githubStore.pagination().page"
+      [pageSize]="githubStore.pagination().per_page"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+  }
+</div>
+
+<ng-template #shimmerUserProfile>
+  <div
+    class="w-40 h-40 bg-gray-100 rounded-md flex flex-col gap-2 p-3 items-center animate-pulse"
+  >
+    <div class="rounded-full bg-gray-300 w-14 h-14"></div>
+
+    <div class="bg-gray-300 rounded h-4 w-24"></div>
+
+    <div class="bg-gray-300 rounded-md h-6 w-28"></div>
+  </div>
+</ng-template>

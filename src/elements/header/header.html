@@ -1,0 +1,25 @@
+<header
+  class="shadow-sm w-full h-16 fixed z-50 flex justify-between items-center px-4"
+>
+  <h1 class="font-bold gap-1 flex">
+    <i class="ri-github-line"></i>Github Dashboard
+  </h1>
+  <nav>
+    <ul class="flex gap-3">
+      <li>
+        <a
+          class="nav-link"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a class="nav-link" routerLink="history" routerLinkActive="active"
+          >History</a
+        >
+      </li>
+    </ul>
+  </nav>
+</header>

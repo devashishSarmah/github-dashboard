@@ -1,0 +1,25 @@
+<nav class="flex gap-3">
+  <button class="pagination-btn" [disabled]="currentPage() === 1">
+    <i class="ri-arrow-left-s-line"></i>Prev
+  </button>
+
+  @for(page of visiblePages(); track page) {
+  <ng-container>
+    @if(page === '...') {
+    <span>{{ page }}</span>
+    } @else {
+    <button
+      class="pagination-btn"
+      [class.active]="currentPage() === page"
+      (click)="go(page)"
+    >
+      {{ page }}
+    </button>
+    }
+  </ng-container>
+  }
+
+  <button class="pagination-btn" [disabled]="currentPage() === totalPages()">
+    Next<i class="ri-arrow-right-s-line"></i>
+  </button>
+</nav>
