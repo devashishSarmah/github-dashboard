@@ -11,6 +11,7 @@
       />
     </div>
     <button
+      id="searchBtn"
       #searchBtn
       class="py-1 px-2 bg-gray-100 hover:bg-gray-300 rounded-md disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100 transition-colors"
       [disabled]="!query().length"
@@ -25,10 +26,14 @@
     @if(githubStore.isLoading()) { @for(i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
     12]; track i) {
     <ng-container *ngTemplateOutlet="shimmerUserProfile"></ng-container>
-    } } @else { @for(profile of githubStore.searchUserResponse()?.items; track
-    profile.login) {
+    } } @else if(githubStore.searchUserResponse()?.items?.length) { @for(profile
+    of githubStore.searchUserResponse()?.items; track profile.login) {
     <app-user-profile-card [profile]="profile"></app-user-profile-card>
-    } }
+    } } @else if(githubStore.searchUserResponse()?.total_count === 0) {
+    <div class="w-full flex items-center justify-center mt-6">
+      <p>No results found</p>
+    </div>
+    }
   </div>
   @if(githubStore.searchUserResponse()?.total_count) {
   <div class="mt-8">
