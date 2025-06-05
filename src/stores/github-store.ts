@@ -48,11 +48,13 @@ export const userSearchStore = signalStore(
                 tapResponse({
                   next: (response) => {
                     patchState(store, { searchUserResponse: response });
-                    globalHistoryStore.add({
-                      query: filter.query,
-                      items: response.items.slice(0, 3),
-                      total: response.total_count,
-                    });
+                    if (pagination.page === 1) {
+                      globalHistoryStore.add({
+                        query: filter.query,
+                        items: response.items.slice(0, 3),
+                        total: response.total_count,
+                      });
+                    }
                   },
                   error: (error) => {
                     console.error("Error fetching users:", error);
